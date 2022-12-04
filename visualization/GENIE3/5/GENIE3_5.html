@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 90%;
+                 height: 4000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "G26", "label": "G26", "shape": "dot"}, {"color": "#97c2fc", "id": "G20", "label": "G20", "shape": "dot"}, {"color": "#97c2fc", "id": "G82", "label": "G82", "shape": "dot"}, {"color": "#97c2fc", "id": "G39", "label": "G39", "shape": "dot"}, {"color": "#97c2fc", "id": "G51", "label": "G51", "shape": "dot"}, {"color": "#97c2fc", "id": "G68", "label": "G68", "shape": "dot"}, {"color": "#97c2fc", "id": "G67", "label": "G67", "shape": "dot"}, {"color": "#97c2fc", "id": "G59", "label": "G59", "shape": "dot"}, {"color": "#97c2fc", "id": "G81", "label": "G81", "shape": "dot"}, {"color": "#97c2fc", "id": "G7", "label": "G7", "shape": "dot"}, {"color": "#97c2fc", "id": "G31", "label": "G31", "shape": "dot"}, {"color": "#97c2fc", "id": "G86", "label": "G86", "shape": "dot"}, {"color": "#97c2fc", "id": "G71", "label": "G71", "shape": "dot"}, {"color": "#97c2fc", "id": "G94", "label": "G94", "shape": "dot"}, {"color": "#97c2fc", "id": "G72", "label": "G72", "shape": "dot"}, {"color": "#97c2fc", "id": "G18", "label": "G18", "shape": "dot"}, {"color": "#97c2fc", "id": "G34", "label": "G34", "shape": "dot"}, {"color": "#97c2fc", "id": "G40", "label": "G40", "shape": "dot"}, {"color": "#97c2fc", "id": "G92", "label": "G92", "shape": "dot"}, {"color": "#97c2fc", "id": "G36", "label": "G36", "shape": "dot"}, {"color": "#97c2fc", "id": "G9", "label": "G9", "shape": "dot"}, {"color": "#97c2fc", "id": "G48", "label": "G48", "shape": "dot"}, {"color": "#97c2fc", "id": "G3", "label": "G3", "shape": "dot"}, {"color": "#97c2fc", "id": "G49", "label": "G49", "shape": "dot"}, {"color": "#97c2fc", "id": "G37", "label": "G37", "shape": "dot"}, {"color": "#97c2fc", "id": "G53", "label": "G53", "shape": "dot"}, {"color": "#97c2fc", "id": "G85", "label": "G85", "shape": "dot"}, {"color": "#97c2fc", "id": "G63", "label": "G63", "shape": "dot"}, {"color": "#97c2fc", "id": "G35", "label": "G35", "shape": "dot"}, {"color": "#97c2fc", "id": "G25", "label": "G25", "shape": "dot"}, {"color": "#97c2fc", "id": "G99", "label": "G99", "shape": "dot"}, {"color": "#97c2fc", "id": "G8", "label": "G8", "shape": "dot"}, {"color": "#97c2fc", "id": "G88", "label": "G88", "shape": "dot"}, {"color": "#97c2fc", "id": "G60", "label": "G60", "shape": "dot"}, {"color": "#97c2fc", "id": "G21", "label": "G21", "shape": "dot"}, {"color": "#97c2fc", "id": "G100", "label": "G100", "shape": "dot"}, {"color": "#97c2fc", "id": "G66", "label": "G66", "shape": "dot"}, {"color": "#97c2fc", "id": "G43", "label": "G43", "shape": "dot"}, {"color": "#97c2fc", "id": "G74", "label": "G74", "shape": "dot"}, {"color": "#97c2fc", "id": "G93", "label": "G93", "shape": "dot"}, {"color": "#97c2fc", "id": "G62", "label": "G62", "shape": "dot"}, {"color": "#97c2fc", "id": "G79", "label": "G79", "shape": "dot"}, {"color": "#97c2fc", "id": "G24", "label": "G24", "shape": "dot"}, {"color": "#97c2fc", "id": "G89", "label": "G89", "shape": "dot"}, {"color": "#97c2fc", "id": "G52", "label": "G52", "shape": "dot"}, {"color": "#97c2fc", "id": "G38", "label": "G38", "shape": "dot"}, {"color": "#97c2fc", "id": "G70", "label": "G70", "shape": "dot"}, {"color": "#97c2fc", "id": "G73", "label": "G73", "shape": "dot"}, {"color": "#97c2fc", "id": "G32", "label": "G32", "shape": "dot"}, {"color": "#97c2fc", "id": "G83", "label": "G83", "shape": "dot"}, {"color": "#97c2fc", "id": "G57", "label": "G57", "shape": "dot"}, {"color": "#97c2fc", "id": "G27", "label": "G27", "shape": "dot"}, {"color": "#97c2fc", "id": "G11", "label": "G11", "shape": "dot"}, {"color": "#97c2fc", "id": "G56", "label": "G56", "shape": "dot"}, {"color": "#97c2fc", "id": "G55", "label": "G55", "shape": "dot"}, {"color": "#97c2fc", "id": "G46", "label": "G46", "shape": "dot"}, {"color": "#97c2fc", "id": "G90", "label": "G90", "shape": "dot"}, {"color": "#97c2fc", "id": "G13", "label": "G13", "shape": "dot"}, {"color": "#97c2fc", "id": "G15", "label": "G15", "shape": "dot"}, {"color": "#97c2fc", "id": "G22", "label": "G22", "shape": "dot"}, {"color": "#97c2fc", "id": "G44", "label": "G44", "shape": "dot"}, {"color": "#97c2fc", "id": "G64", "label": "G64", "shape": "dot"}, {"color": "#97c2fc", "id": "G61", "label": "G61", "shape": "dot"}, {"color": "#97c2fc", "id": "G29", "label": "G29", "shape": "dot"}, {"color": "#97c2fc", "id": "G75", "label": "G75", "shape": "dot"}, {"color": "#97c2fc", "id": "G77", "label": "G77", "shape": "dot"}, {"color": "#97c2fc", "id": "G28", "label": "G28", "shape": "dot"}, {"color": "#97c2fc", "id": "G16", "label": "G16", "shape": "dot"}, {"color": "#97c2fc", "id": "G58", "label": "G58", "shape": "dot"}, {"color": "#97c2fc", "id": "G6", "label": "G6", "shape": "dot"}, {"color": "#97c2fc", "id": "G17", "label": "G17", "shape": "dot"}, {"color": "#97c2fc", "id": "G45", "label": "G45", "shape": "dot"}, {"color": "#97c2fc", "id": "G95", "label": "G95", "shape": "dot"}, {"color": "#97c2fc", "id": "G33", "label": "G33", "shape": "dot"}, {"color": "#97c2fc", "id": "G50", "label": "G50", "shape": "dot"}, {"color": "#97c2fc", "id": "G12", "label": "G12", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "blue", "from": "G82", "to": "G48"}, {"arrows": "to", "color": "blue", "from": "G26", "to": "G63"}, {"arrows": "to", "color": "blue", "from": "G20", "to": "G39"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G9"}, {"arrows": "to", "color": "blue", "from": "G39", "to": "G20"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G82"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G51"}, {"arrows": "to", "color": "blue", "from": "G68", "to": "G67"}, {"arrows": "to", "color": "blue", "from": "G26", "to": "G31"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G71"}, {"arrows": "to", "color": "red", "from": "G67", "to": "G68"}, {"arrows": "to", "color": "blue", "from": "G59", "to": "G92"}, {"arrows": "to", "color": "blue", "from": "G81", "to": "G34"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G18"}, {"arrows": "to", "color": "red", "from": "G31", "to": "G26"}, {"arrows": "to", "color": "red", "from": "G86", "to": "G52"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G88"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G21"}, {"arrows": "to", "color": "blue", "from": "G94", "to": "G72"}, {"arrows": "to", "color": "blue", "from": "G20", "to": "G8"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G70"}, {"arrows": "to", "color": "blue", "from": "G72", "to": "G94"}, {"arrows": "to", "color": "red", "from": "G18", "to": "G7"}, {"arrows": "to", "color": "blue", "from": "G39", "to": "G73"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G38"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G70"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G32"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G66"}, {"arrows": "to", "color": "red", "from": "G34", "to": "G81"}, {"arrows": "to", "color": "blue", "from": "G94", "to": "G3"}, {"arrows": "to", "color": "red", "from": "G40", "to": "G81"}, {"arrows": "to", "color": "blue", "from": "G92", "to": "G59"}, {"arrows": "to", "color": "blue", "from": "G59", "to": "G25"}, {"arrows": "to", "color": "blue", "from": "G36", "to": "G83"}, {"arrows": "to", "color": "red", "from": "G9", "to": "G57"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G27"}, {"arrows": "to", "color": "blue", "from": "G48", "to": "G11"}, {"arrows": "to", "color": "blue", "from": "G3", "to": "G94"}, {"arrows": "to", "color": "blue", "from": "G26", "to": "G49"}, {"arrows": "to", "color": "red", "from": "G49", "to": "G56"}, {"arrows": "to", "color": "blue", "from": "G81", "to": "G40"}, {"arrows": "to", "color": "red", "from": "G37", "to": "G85"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G57"}, {"arrows": "to", "color": "blue", "from": "G53", "to": "G55"}, {"arrows": "to", "color": "red", "from": "G85", "to": "G37"}, {"arrows": "to", "color": "blue", "from": "G51", "to": "G38"}, {"arrows": "to", "color": "red", "from": "G63", "to": "G26"}, {"arrows": "to", "color": "blue", "from": "G68", "to": "G99"}, {"arrows": "to", "color": "red", "from": "G35", "to": "G43"}, {"arrows": "to", "color": "blue", "from": "G25", "to": "G59"}, {"arrows": "to", "color": "blue", "from": "G26", "to": "G46"}, {"arrows": "to", "color": "blue", "from": "G99", "to": "G8"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G90"}, {"arrows": "to", "color": "red", "from": "G9", "to": "G13"}, {"arrows": "to", "color": "blue", "from": "G20", "to": "G99"}, {"arrows": "to", "color": "blue", "from": "G9", "to": "G82"}, {"arrows": "to", "color": "blue", "from": "G8", "to": "G74"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G15"}, {"arrows": "to", "color": "blue", "from": "G18", "to": "G22"}, {"arrows": "to", "color": "blue", "from": "G88", "to": "G11"}, {"arrows": "to", "color": "red", "from": "G60", "to": "G44"}, {"arrows": "to", "color": "red", "from": "G21", "to": "G37"}, {"arrows": "to", "color": "blue", "from": "G8", "to": "G99"}, {"arrows": "to", "color": "blue", "from": "G92", "to": "G13"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G11"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G22"}, {"arrows": "to", "color": "blue", "from": "G20", "to": "G64"}, {"arrows": "to", "color": "red", "from": "G100", "to": "G61"}, {"arrows": "to", "color": "red", "from": "G85", "to": "G29"}, {"arrows": "to", "color": "red", "from": "G66", "to": "G7"}, {"arrows": "to", "color": "red", "from": "G43", "to": "G75"}, {"arrows": "to", "color": "blue", "from": "G74", "to": "G8"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G37"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G51"}, {"arrows": "to", "color": "blue", "from": "G72", "to": "G24"}, {"arrows": "to", "color": "red", "from": "G25", "to": "G85"}, {"arrows": "to", "color": "red", "from": "G25", "to": "G21"}, {"arrows": "to", "color": "red", "from": "G93", "to": "G77"}, {"arrows": "to", "color": "blue", "from": "G26", "to": "G28"}, {"arrows": "to", "color": "red", "from": "G62", "to": "G16"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G58"}, {"arrows": "to", "color": "blue", "from": "G82", "to": "G90"}, {"arrows": "to", "color": "red", "from": "G86", "to": "G6"}, {"arrows": "to", "color": "red", "from": "G79", "to": "G6"}, {"arrows": "to", "color": "blue", "from": "G71", "to": "G85"}, {"arrows": "to", "color": "blue", "from": "G7", "to": "G17"}, {"arrows": "to", "color": "red", "from": "G25", "to": "G15"}, {"arrows": "to", "color": "red", "from": "G62", "to": "G45"}, {"arrows": "to", "color": "red", "from": "G21", "to": "G85"}, {"arrows": "to", "color": "red", "from": "G62", "to": "G95"}, {"arrows": "to", "color": "blue", "from": "G31", "to": "G49"}, {"arrows": "to", "color": "red", "from": "G24", "to": "G72"}, {"arrows": "to", "color": "blue", "from": "G74", "to": "G33"}, {"arrows": "to", "color": "blue", "from": "G72", "to": "G3"}, {"arrows": "to", "color": "blue", "from": "G89", "to": "G17"}, {"arrows": "to", "color": "blue", "from": "G48", "to": "G88"}, {"arrows": "to", "color": "blue", "from": "G52", "to": "G86"}, {"arrows": "to", "color": "red", "from": "G99", "to": "G50"}, {"arrows": "to", "color": "blue", "from": "G53", "to": "G12"}, {"arrows": "to", "color": "blue", "from": "G38", "to": "G71"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
