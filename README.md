@@ -79,8 +79,7 @@ To configure your current shell run `source $HOME/.poetry/env`
 - Retrieve the code
 
 ```
-wget https://github.com/DuaaAlawad/AGRN.git
-unzip AGRN.zip
+git clone https://github.com/DuaaAlawad/AGRN.git
 
 ```
 
