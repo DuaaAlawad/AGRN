@@ -22,7 +22,7 @@ the data which have been used in this paper is from DREAM4 and DREAM5 challenges
 
 In **DREAM4 challenge**, the dataset  comprises two main files:
 
-    1-  Ggene expression data
+    1-  Gene expression data
     2-  GoldStandardard for each network
 
 
@@ -99,7 +99,7 @@ To run the program, first, set the input path in the input.txt file. Here is a s
 Then, run following python command from the root directory.
 
 ```
-cd AGRN_tool
+cd AGRN
 poetry install
 poetry run python AGRN.py
 
