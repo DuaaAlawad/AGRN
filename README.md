@@ -3,7 +3,7 @@
 
 ### Table of Content
 
-- [Setup](#getting-started)
+- [Getting-started](#getting-started)
 - [Dataset](#Dataset)
 - [Prerequisites](#Prerequisites)
 - [Download and install code](#download-and-install-code)
