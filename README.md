@@ -106,6 +106,10 @@ poetry run python AGRN.py
 
 - Finally, check **output** folder for results. The output directory contains importance scores from ETR, SVR and RFR in csv files. The OutputResults.txt file shows the results in AUROC and AUPR.
 
+To run AGRN using your own data, you should set the input path in the input.txt file. 
+- the first line in the input file: ***expression_data.csv** represents the row as samples and the column as genes.
+- the second line in the input file: ***GoldStandard.csv** represents the first column as a transcription factor, the second column as a target gene, and the third column refer to 1  as an interaction pair and 0 as a non-interaction pair.
+- the third line in the input file: ***transcription_factors.csv*** contains one column which represents the transcription factors.
 
 ## Authors
 
